@@ -20,6 +20,17 @@ const saveOptions = () => {
   });
 };
 
+// Saves options to chrome.storage
+const removeValue = (keyToRemove) => {
+  chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
+    newList = [...oldSites.sitesToRedirect.filter((x) => x !== keyToRemove)];
+    debugger;
+    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+      createList(newList);
+    });
+  });
+};
+
 const createList = (items) => {
   console.log("Running create list...");
   var listContainer = document.getElementById("listContainer");
@@ -27,8 +38,15 @@ const createList = (items) => {
   var ul = document.createElement("ul");
   items.forEach(function (item) {
     var li = document.createElement("li");
+    var removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", function () {
+      console.log("Remove button clicked!");
+      removeValue(item);
+    });
     li.textContent = item;
-    ul.appendChild(li);
+    ul.appendChild(li).append(removeButton);
+    // ul.appendChild(removeButton);
   });
   listContainer.appendChild(ul);
 };
