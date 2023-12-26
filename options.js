@@ -1,37 +1,47 @@
 document.addEventListener("DOMContentLoaded", function () {
   var myButton = document.getElementById("save");
-
   myButton.addEventListener("click", function () {
-    console.log("Button clicked!");
     saveOptions();
   });
+  restoreOptions();
 });
 
-// Saves options to chrome.storage
+const restoreOptions = () => {
+  chrome.storage.sync.get("sitesToRedirect").then((result) => {
+    updateSitesList(result.sitesToRedirect);
+  });
+};
+
 const saveOptions = () => {
   const websiteToRedirect = document.getElementById("websiteToRedirect").value;
   console.log("Website value: " + websiteToRedirect);
   chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
     newList = [...oldSites.sitesToRedirect, websiteToRedirect];
-    debugger;
     chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-      createList(newList);
+      updateSitesList(newList);
     });
   });
 };
 
-// Saves options to chrome.storage
+const addValue = (newValue) => {
+  chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
+    newList = [...oldSites.sitesToRedirect, newValue];
+    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+      updateSitesList(newList);
+    });
+  });
+};
+
 const removeValue = (keyToRemove) => {
   chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
     newList = [...oldSites.sitesToRedirect.filter((x) => x !== keyToRemove)];
-    debugger;
     chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-      createList(newList);
+      updateSitesList(newList);
     });
   });
 };
 
-const createList = (items) => {
+const updateSitesList = (items) => {
   console.log("Running create list...");
   var listContainer = document.getElementById("listContainer");
   listContainer.innerHTML = "";
@@ -46,23 +56,6 @@ const createList = (items) => {
     });
     li.textContent = item;
     ul.appendChild(li).append(removeButton);
-    // ul.appendChild(removeButton);
   });
   listContainer.appendChild(ul);
 };
-
-document.addEventListener("DOMContentLoaded", function () {
-  restoreOptions();
-});
-
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
-const restoreOptions = () => {
-  chrome.storage.sync.get("sitesToRedirect").then((result) => {
-    debugger;
-    createList(result.sitesToRedirect);
-  });
-};
-
-// document.addEventListener("DOMContentLoaded", restoreOptions);
-// document.getElementById("save").addEventListener("click", saveOptions);
