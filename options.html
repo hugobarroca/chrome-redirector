@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scald's Redirector Options</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="container ml-1">
+    <div>
+      <h1>Scald's Redirector</h1>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Sites to redirect from</label>
+        <input
+          class="form-control"
+          id="websiteToRedirect"
+          placeholder="https://www.example.com/"
+        />
+      </div>
+      <button type="button" class="btn btn-primary" id="save">Add</button>
+    </div>
+    <h3>Prohibited Websites</h3>
+    <div id="listContainer"></div>
+    <script src="options.js"></script>
+  </body>
+</html>

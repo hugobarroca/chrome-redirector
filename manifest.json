@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Scald's Redirector",
+  "description": "Extensions which redirects the user away from time-consuming websites.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "redirector.html",
+    "default_icon": "redirector.png"
+  },
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": ["https://www.youtube.com/", "https://www.instagram.com/*"],
+      "run_at": "document_start"
+    }
+  ]
+}
