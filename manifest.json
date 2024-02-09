@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "js": ["scripts/content.js"],
-      "matches": ["https://www.youtube.com/", "https://www.instagram.com/*"],
+      "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
   ]
