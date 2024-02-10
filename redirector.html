@@ -8,10 +8,21 @@
   <body>
     <div class="container">
       <h1>Scald's Redirector</h1>
-      <button>Add site</button>
-      <button id="go-to-options">Go to options</button>
-      <script src="popup.js"></script>
-      <i class="fas fa-cloud"></i><a>Settings</a>
+      <button id="options">Options</button>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Disable for</label>
+        <input
+          class="form-control"
+          id="disableTime"
+          placeholder="5"
+          type="number"
+        />
+        <label for="exampleInputEmail1">minutes</label>
+        <button type="button" class="btn btn-primary" id="disable">
+          Disable
+        </button>
+        <label id="disabledLabel">???</label>
     </div>
+    <script src="scripts/popup.js"></script>
   </body>
 </html>
