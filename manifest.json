@@ -7,7 +7,7 @@
     "default_popup": "redirector.html",
     "default_icon": "redirector.png"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "alarms"],
   "options_page": "options.html",
   "content_scripts": [
     {
@@ -15,5 +15,9 @@
       "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  }
 }
