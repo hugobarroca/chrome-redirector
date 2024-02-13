@@ -4,12 +4,17 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link
+    rel="stylesheet"
+    href="popup.css"
+  />
   </head>
   <body>
     <div class="container">
-      <h3>Scald's Redirector</h3>
+      <h3>Easy Redirector</h3>
+      Current state: <label id="disabledLabel">???</label>
       <div class="form-group">
-        <label for="exampleInputEmail1">Disable for how long? (minutes)</label>
+        <label for="exampleInputEmail1" id="disableTimeLabel">Disable for how long? (minutes)</label>
         <input
           class="form-control"
           id="disableTime"
@@ -21,11 +26,10 @@
           Disable
         </button>
         <br />
-        <label id="disabledLabel">???</label>
         <label type="number" id="timerDisplay"></label>
         <br />
         <button id="options">Options</button>
     </div>
-    <script src="scripts/popup.js"></script>
+    <script src="popup.js"></script>
   </body>
 </html>

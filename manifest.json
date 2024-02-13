@@ -4,11 +4,11 @@
   "description": "Extensions which redirects the user away from time-consuming websites.",
   "version": "1.0",
   "action": {
-    "default_popup": "redirector.html",
-    "default_icon": "redirector.png"
+    "default_popup": "popup/popup.html",
+    "default_icon": "popup/popup.png"
   },
   "permissions": ["storage", "alarms"],
-  "options_page": "options.html",
+  "options_page": "options/options.html",
   "content_scripts": [
     {
       "js": ["scripts/content.js"],
