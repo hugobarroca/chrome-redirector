@@ -1,27 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
   var myButton = document.getElementById("save");
-  myButton.addEventListener("click", function () {
-    saveOptions();
-  });
+  myButton.addEventListener("click", saveOptions);
   createListWithSavedOptions();
 });
 
 const saveOptions = () => {
-  const websiteToRedirect = document.getElementById("websiteToRedirect").value;
+  let websiteToRedirect = document.getElementById("websiteToRedirect").value;
+  websiteToRedirect = websiteToRedirect.replace(/(^\w+:|^)\/\//, "");
+
   console.log("Website value: " + websiteToRedirect);
   chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
     console.log(oldSites);
     if (isEmpty(oldSites)) {
       newList = [websiteToRedirect];
-      chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-        createListOfRedirectedSites(newList);
-      });
     } else {
       newList = [...oldSites?.sitesToRedirect, websiteToRedirect];
-      chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-        createListOfRedirectedSites(newList);
-      });
     }
+    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+      createListOfRedirectedSites(newList);
+    });
   });
 };
 
@@ -56,17 +53,30 @@ const createListOfRedirectedSites = (websitesToRedirect) => {
   var ul = document.createElement("ul");
   websitesToRedirect.forEach(function (item) {
     var li = document.createElement("li");
-    var removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.addEventListener("click", function () {
+    var removeIcon = createRemoveIcon();
+    removeIcon.addEventListener("click", function () {
       console.log("Remove button clicked!");
       removeValue(item);
     });
     li.textContent = item;
-    ul.appendChild(li).append(removeButton);
+    ul.appendChild(li).append(removeIcon);
   });
   listContainer.appendChild(ul);
 };
+
+function createRemoveIcon() {
+  var removeIcon = document.createElement("img");
+  removeIcon.src = "icons8-close.svg";
+  removeIcon.alt = "Remove";
+  removeIcon.width = 20;
+  removeIcon.height = 20;
+  removeIcon.style.cursor = "pointer";
+  return removeIcon;
+}
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
