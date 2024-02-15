@@ -60,9 +60,17 @@ setInterval(updateDisplay, 1000);
 // Disables the extension and sets an alarm to enable the extension after a specified amount of time
 function disableButtonFunctionality() {
   chrome.storage.sync.set({ disabled: true }, () => {
-    let disableTimeInMinutes = parseInt(
-      document.getElementById("disableTime").value
-    );
+    // Assuming the value is a string in the format hours:minutes (e.g. "1:30"), split the string into an array of two strings
+    const disableTime = document.getElementById("disableTime").value.split(":");
+    // Convert the first string in the array to a number and multiply it by 60 to convert hours to minutes
+    const hoursInMinutes = parseInt(disableTime[0]) * 60;
+    // Convert the second string in the array to a number
+    const minutes = parseInt(disableTime[1]);
+    // Add the two numbers together to get the total number of minutes
+    const disableTimeInMinutes = hoursInMinutes + minutes;
+    // let disableTimeInMinutes = parseInt(
+    //   document.getElementById("disableTime").value
+    // );
 
     chrome.alarms.create("enable", {
       delayInMinutes: disableTimeInMinutes, // Convert disableTimeInMinutes to a number
