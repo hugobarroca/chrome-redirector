@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Scald's Redirector Options</title>
+    <title>Easy Redirector Options</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -9,19 +9,19 @@
   </head>
   <body class="container ml-1">
     <div>
-      <h1>Scald's Redirector</h1>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Sites to redirect from</label>
-        <input
-          class="form-control"
-          id="websiteToRedirect"
-          placeholder="https://www.example.com/"
-        />
-      </div>
+      <h1>&#128295; Easy Redirector Options</h1>
+    </div>
+    <h3>&#128683; Blocked sites</h3>
+    <div id="listContainer"></div>
+    <div class="form-group flex-container">
+      <input
+        class="form-control scald-input"
+        style="width: 50%; display: inline"
+        id="websiteToRedirect"
+        placeholder="https://www.example.com/"
+      />
       <button type="button" class="btn btn-primary" id="save">Add</button>
     </div>
-    <h3>Prohibited Websites</h3>
-    <div id="listContainer"></div>
     <script src="options.js"></script>
   </body>
 </html>
