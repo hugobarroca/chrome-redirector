@@ -1,14 +1,68 @@
 body {
+  background-color: #e9e9e9;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
 
+/* .add-input {
+  width: 100%;
+  display: inline;
+} */
+
+.add-button {
+  margin-left: 10px;
+}
+
 .flex-container {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#main-container {
+  background-color: white;
+  padding: 20px;
+  margin-top: 10%;
+}
+
+#minor-container {
+  display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+#block-input {
+  width: 30%;
+}
+
+#listContainer {
+  min-width: 30%;
+}
+
+/* Makes the item have a red background when we hover over it */
+/* Makes the mouse clickable as well */
+.blocked-site:hover {
+  background-color: #ffcccc;
+  cursor: pointer;
+}
+
+.blocked-site {
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: large;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #e9e9e9;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
 }

@@ -6,21 +6,23 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="./options.css" />
   </head>
-  <body class="container ml-1">
-    <div>
+  <body class="background container ml-1">
+    <div id="main-container" class="flex-container">
       <h1>&#128295; Easy Redirector Options</h1>
-    </div>
-    <h3>&#128683; Blocked sites</h3>
-    <div id="listContainer"></div>
-    <div class="form-group flex-container">
-      <input
-        class="form-control scald-input"
-        style="width: 50%; display: inline"
-        id="websiteToRedirect"
-        placeholder="https://www.example.com/"
-      />
-      <button type="button" class="btn btn-primary" id="save">Add</button>
+      <h3>&#128683; Blocked sites</h3>
+      <div id="listContainer"></div>
+      <div id="minor-container">
+        <input
+          class="form-control"
+          id="block-input"
+          placeholder="https://www.example.com/"
+        />
+        <button type="button" class="btn btn-primary add-button" id="save">
+          Add
+        </button>
+      </div>
     </div>
     <script src="options.js"></script>
   </body>

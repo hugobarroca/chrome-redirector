@@ -1,11 +1,24 @@
+// Startup code for the options page
 document.addEventListener("DOMContentLoaded", function () {
   var myButton = document.getElementById("save");
   myButton.addEventListener("click", saveOptions);
   createListWithSavedOptions();
 });
 
+clickButtonOnEnter();
+
+// Makes the input field to be focused when the options page is opened
+document.getElementById("block-input").focus();
+
+// === Functions === //
+
 const saveOptions = () => {
-  let websiteToRedirect = document.getElementById("websiteToRedirect").value;
+  let websiteToRedirect = document.getElementById("block-input").value;
+
+  if (websiteToRedirect === "") {
+    return;
+  }
+
   websiteToRedirect = websiteToRedirect.replace(/(^\w+:|^)\/\//, "");
 
   console.log("Website value: " + websiteToRedirect);
@@ -50,18 +63,19 @@ const createListOfRedirectedSites = (websitesToRedirect) => {
   console.log("Running create list...");
   var listContainer = document.getElementById("listContainer");
   listContainer.innerHTML = "";
-  var ul = document.createElement("ul");
+  var blockedSitesDiv = document.createElement("div");
   websitesToRedirect.forEach(function (item) {
-    var li = document.createElement("li");
+    var blockedSiteItem = document.createElement("p");
+    blockedSiteItem.className = "blocked-site";
     var removeIcon = createRemoveIcon();
-    removeIcon.addEventListener("click", function () {
+    blockedSiteItem.addEventListener("click", function () {
       console.log("Remove button clicked!");
       removeValue(item);
     });
-    li.textContent = item;
-    ul.appendChild(li).append(removeIcon);
+    blockedSiteItem.textContent = item;
+    blockedSitesDiv.appendChild(blockedSiteItem);
   });
-  listContainer.appendChild(ul);
+  listContainer.appendChild(blockedSitesDiv);
 };
 
 function createRemoveIcon() {
@@ -72,6 +86,16 @@ function createRemoveIcon() {
   removeIcon.height = 20;
   removeIcon.style.cursor = "pointer";
   return removeIcon;
+}
+
+function clickButtonOnEnter() {
+  let input = document.getElementById("block-input");
+  input.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("save").click();
+    }
+  });
 }
 
 function isEmpty(obj) {
