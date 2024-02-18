@@ -1,27 +1,25 @@
 // Startup code for the options page
 document.addEventListener("DOMContentLoaded", function () {
-  var myButton = document.getElementById("save");
-  myButton.addEventListener("click", saveOptions);
+  let addButton = document.getElementById("add-website-button");
+  addButton.addEventListener("click", addWebsite);
   createListWithSavedOptions();
 });
 
 clickButtonOnEnter();
 
 // Makes the input field to be focused when the options page is opened
-document.getElementById("block-input").focus();
+document.getElementById("add-website-input").focus();
 
 // === Functions === //
-
-const saveOptions = () => {
-  let websiteToRedirect = document.getElementById("block-input").value;
+const addWebsite = () => {
+  let websiteToRedirect = document.getElementById("add-website-input").value;
 
   if (websiteToRedirect === "") {
     return;
   }
 
-  websiteToRedirect = websiteToRedirect.replace(/(^\w+:|^)\/\//, "");
+  websiteToRedirect = removeProtocolFromWebsite(websiteToRedirect);
 
-  console.log("Website value: " + websiteToRedirect);
   chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
     console.log(oldSites);
     if (isEmpty(oldSites)) {
@@ -33,6 +31,10 @@ const saveOptions = () => {
       createListOfRedirectedSites(newList);
     });
   });
+};
+
+const removeProtocolFromWebsite = (website) => {
+  return website.replace(/(^\w+:|^)\/\//, "");
 };
 
 const createListWithSavedOptions = () => {
@@ -89,11 +91,11 @@ function createRemoveIcon() {
 }
 
 function clickButtonOnEnter() {
-  let input = document.getElementById("block-input");
+  let input = document.getElementById("add-website-input");
   input.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      document.getElementById("save").click();
+      document.getElementById("add-website-button").click();
     }
   });
 }

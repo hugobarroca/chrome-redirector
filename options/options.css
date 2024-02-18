@@ -5,44 +5,12 @@ body {
   padding: 0;
 }
 
-/* .add-input {
-  width: 100%;
-  display: inline;
-} */
-
-.add-button {
-  margin-left: 10px;
-}
-
 .flex-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-#main-container {
-  background-color: white;
-  padding: 20px;
-  margin-top: 10%;
-}
-
-#minor-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 100%;
-}
-
-#block-input {
-  width: 30%;
-}
-
-#listContainer {
-  min-width: 30%;
-}
-
-/* Makes the item have a red background when we hover over it */
-/* Makes the mouse clickable as well */
 .blocked-site:hover {
   background-color: #ffcccc;
   cursor: pointer;
@@ -65,4 +33,30 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#add-website-button {
+  margin-left: 10px;
+}
+
+#main-container {
+  background-color: white;
+  padding: 20px;
+  margin-top: 10%;
+}
+
+#minor-container {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+#add-website-input {
+  width: 30%;
+}
+
+#listContainer {
+  min-width: 30%;
 }
