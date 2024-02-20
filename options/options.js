@@ -1,6 +1,6 @@
 // Startup code for the options page
 document.addEventListener("DOMContentLoaded", function () {
-  let addButton = document.getElementById("add-website-button");
+  let addButton = document.getElementById("add-blocked-website-button");
   addButton.addEventListener("click", addWebsite);
   createListWithSavedOptions();
 });
@@ -95,7 +95,7 @@ function clickButtonOnEnter() {
   input.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      document.getElementById("add-website-button").click();
+      document.getElementById("add-blocked-website-button").click();
     }
   });
 }

@@ -35,7 +35,11 @@ body {
   align-items: center;
 }
 
-#add-website-button {
+#add-blocked-website-button {
+  margin-left: 10px;
+}
+
+#add-lucky-website-button {
   margin-left: 10px;
 }
 
@@ -53,7 +57,19 @@ body {
   width: 100%;
 }
 
+#lucky-list-container {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
 #add-website-input {
+  width: 30%;
+}
+
+#add-lucky-website-input {
   width: 30%;
 }
 
