@@ -7,3 +7,7 @@ body {
   align-items: baseline;
   justify-content: space-between;
 }
+
+#button-bar {
+  margin-bottom: 10px;
+}
