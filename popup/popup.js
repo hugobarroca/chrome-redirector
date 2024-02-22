@@ -2,21 +2,29 @@ document.getElementById("options").addEventListener("click", function () {
   chrome.tabs.create({ url: "options/options.html" });
 });
 
-function updateEnableButton() {
-  chrome.storage.sync.get("disabled", (data) => {
-    const disableButton = document.getElementById("disable");
-    if (data.disabled) {
-      disableButton.textContent = "Enable";
-      disableButton.addEventListener("click", function () {
-        chrome.storage.sync.set({ disabled: false }, () => {
-          console.log("Enabled");
-        });
-      });
-    } else {
-      disableButton.textContent = "Disable";
-      disableButton.addEventListener("click", disableButtonFunctionality);
-    }
+document
+  .getElementById("10-minutes-button")
+  .addEventListener("click", function () {
+    disableRedirector(10);
   });
+
+document
+  .getElementById("30-minutes-button")
+  .addEventListener("click", function () {
+    disableRedirector(30);
+  });
+
+document.getElementById("1-hour-button").addEventListener("click", function () {
+  disableRedirector(60);
+});
+
+updateTimerAndEnableButton();
+setInterval(updateTimerAndEnableButton, 1000);
+
+function updateTimerAndEnableButton() {
+  updateTimer();
+  updateEnableLabel();
+  updateEnableButton();
 }
 
 function updateTimer() {
@@ -45,6 +53,28 @@ function updateTimer() {
   });
 }
 
+function updateEnableButton() {
+  chrome.storage.sync.get("disabled", (data) => {
+    const disableButton = document.getElementById("disable");
+    if (data.disabled) {
+      disableButton.removeEventListener("click", disableRedirectorCustomTime);
+      disableButton.textContent = "Enable";
+      disableButton.addEventListener("click", reenableRedirector);
+    } else {
+      disableButton.removeEventListener("click", reenableRedirector);
+      disableButton.textContent = "Disable";
+      disableButton.addEventListener("click", disableRedirectorCustomTime);
+    }
+  });
+}
+
+async function reenableRedirector() {
+  await chrome.alarms.clear("enable");
+  chrome.storage.sync.set({ disabled: false }, () => {
+    console.log("Enabled");
+  });
+}
+
 function updateEnableLabel() {
   chrome.storage.sync.get("disabled", (data) => {
     const disabledLabel = document.getElementById("disabledLabel");
@@ -58,24 +88,18 @@ function updateEnableLabel() {
   });
 }
 
-function updateDisplay() {
-  updateTimer();
-  updateEnableLabel();
-  updateEnableButton();
+function disableRedirectorCustomTime() {
+  const disableTime = document.getElementById("disableTime").value.split(":");
+  const hoursInMinutes = parseInt(disableTime[0]) * 60;
+  const minutes = parseInt(disableTime[1]);
+  const disableTimeInMinutes = hoursInMinutes + minutes;
+  disableRedirector(disableTimeInMinutes);
 }
 
-updateDisplay();
-setInterval(updateDisplay, 1000);
-
-function disableButtonFunctionality() {
+function disableRedirector(disableTimeInMinutes) {
   chrome.storage.sync.set({ disabled: true }, () => {
-    const disableTime = document.getElementById("disableTime").value.split(":");
-    const hoursInMinutes = parseInt(disableTime[0]) * 60;
-    const minutes = parseInt(disableTime[1]);
-    const disableTimeInMinutes = hoursInMinutes + minutes;
-
     chrome.alarms.create("enable", {
-      delayInMinutes: disableTimeInMinutes, // Convert disableTimeInMinutes to a number
+      delayInMinutes: disableTimeInMinutes,
     });
   });
 }
