@@ -23,7 +23,7 @@ setInterval(updateTimerAndEnableButton, 1000);
 
 function updateTimerAndEnableButton() {
   updateTimer();
-  updateEnableLabel();
+  updateUI();
   updateEnableButton();
 }
 
@@ -75,17 +75,44 @@ async function reenableRedirector() {
   });
 }
 
-function updateEnableLabel() {
+function updateUI() {
   chrome.storage.sync.get("disabled", (data) => {
-    const disabledLabel = document.getElementById("disabledLabel");
-    if (data.disabled) {
-      disabledLabel.textContent = "Disabled";
-      disabledLabel.style.color = "red";
-    } else {
-      disabledLabel.textContent = "Enabled";
-      disabledLabel.style.color = "green";
-    }
+    updateEnableLabel(data);
+    updateTimerInput(data);
   });
+}
+
+function updateEnableLabel(data) {
+  const disabledLabel = document.getElementById("disabledLabel");
+  if (data.disabled) {
+    disabledLabel.textContent = "Disabled";
+    disabledLabel.style.color = "red";
+  } else {
+    disabledLabel.textContent = "Enabled";
+    disabledLabel.style.color = "green";
+  }
+}
+
+function updateTimerInput(data) {
+  const disableTime = document.getElementById("disableTime");
+  const tenMinutesButton = document.getElementById("10-minutes-button");
+  const thirtyMinutesButton = document.getElementById("30-minutes-button");
+  const oneHourButton = document.getElementById("1-hour-button");
+  const disableTimeLabel = document.getElementById("disableTimeLabel");
+
+  if (data.disabled) {
+    disableTime.style.display = "none";
+    tenMinutesButton.style.display = "none";
+    thirtyMinutesButton.style.display = "none";
+    oneHourButton.style.display = "none";
+    disableTimeLabel.style.display = "none";
+  } else {
+    disableTime.style.display = "inline-block";
+    tenMinutesButton.style.display = "inline-block";
+    thirtyMinutesButton.style.display = "inline-block";
+    oneHourButton.style.display = "inline-block";
+    disableTimeLabel.style.display = "inline-block";
+  }
 }
 
 function disableRedirectorCustomTime() {
