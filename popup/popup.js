@@ -46,7 +46,11 @@ function updateTimer() {
       secondsRemaining =
         secondsRemaining < 10 ? `0${secondsRemaining}` : secondsRemaining;
 
-      timerDisplay.textContent = `Time remaining: ${hoursRemaining}:${minutesRemaining}:${secondsRemaining}`;
+      if (hoursRemaining > 0) {
+        timerDisplay.textContent = `Time remaining: ${hoursRemaining}:${minutesRemaining}:${secondsRemaining}`;
+      } else {
+        timerDisplay.textContent = `Time remaining: ${minutesRemaining}:${secondsRemaining}`;
+      }
     } else {
       timerDisplay.textContent = "";
     }
@@ -101,17 +105,21 @@ function updateTimerInput(data) {
   const disableTimeLabel = document.getElementById("disableTimeLabel");
 
   if (data.disabled) {
-    disableTime.style.display = "none";
-    tenMinutesButton.style.display = "none";
-    thirtyMinutesButton.style.display = "none";
-    oneHourButton.style.display = "none";
-    disableTimeLabel.style.display = "none";
+    timeSelectionSection.style.display = "none";
+
+    // disableTime.style.display = "none";
+    // tenMinutesButton.style.display = "none";
+    // thirtyMinutesButton.style.display = "none";
+    // oneHourButton.style.display = "none";
+    // disableTimeLabel.style.display = "none";
   } else {
-    disableTime.style.display = "inline-block";
-    tenMinutesButton.style.display = "inline-block";
-    thirtyMinutesButton.style.display = "inline-block";
-    oneHourButton.style.display = "inline-block";
-    disableTimeLabel.style.display = "inline-block";
+    timeSelectionSection.style.display = "inline-block";
+    
+    // disableTime.style.display = "inline-block";
+    // tenMinutesButton.style.display = "inline-block";
+    // thirtyMinutesButton.style.display = "inline-block";
+    // oneHourButton.style.display = "inline-block";
+    // disableTimeLabel.style.display = "inline-block";
   }
 }
 

@@ -4,31 +4,35 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
-    <link
-    rel="stylesheet"
-    href="popup.css"
-  />
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <div class="container">
       <h3>Easy Redirector</h3>
       Current state: <label id="disabledLabel">???</label>
-      <div class="form-group">
+      <div id="timeSelectionSection">
         <label id="disableTimeLabel">Disable for how long?</label>
         <div id="button-bar">
-          <button type="button" class="btn btn-light" id="10-minutes-button">10m</button>
-          <button type="button" class="btn btn-light" id="30-minutes-button">30m</button>
-          <button type="button" class="btn btn-light" id="1-hour-button">1h</button>
+          <button type="button" class="btn btn-light" id="10-minutes-button">
+            10m
+          </button>
+          <button type="button" class="btn btn-light" id="30-minutes-button">
+            30m
+          </button>
+          <button type="button" class="btn btn-light" id="1-hour-button">
+            1h
+          </button>
         </div>
-        <!-- Buttons for 10m, 30m and 1hour -->
         <input
           class="form-control"
           id="disableTime"
-          value="00:05"
+          q
+          value="00:00"
           type="time"
-      />
+        />
         <br />
-        <label type="number" id="timerDisplay"></label>
+      </div>
+      <h3 type="number" id="timerDisplay"></h3>
       <div class="flex-container">
         <button type="button" class="btn btn-primary" id="disable">
           Disable
