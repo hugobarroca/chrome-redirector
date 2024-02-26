@@ -47,9 +47,9 @@ function updateTimer() {
         secondsRemaining < 10 ? `0${secondsRemaining}` : secondsRemaining;
 
       if (hoursRemaining > 0) {
-        timerDisplay.textContent = `Time remaining: ${hoursRemaining}:${minutesRemaining}:${secondsRemaining}`;
+        timerDisplay.textContent = `${hoursRemaining}:${minutesRemaining}:${secondsRemaining}`;
       } else {
-        timerDisplay.textContent = `Time remaining: ${minutesRemaining}:${secondsRemaining}`;
+        timerDisplay.textContent = `${minutesRemaining}:${secondsRemaining}`;
       }
     } else {
       timerDisplay.textContent = "";
@@ -114,7 +114,7 @@ function updateTimerInput(data) {
     // disableTimeLabel.style.display = "none";
   } else {
     timeSelectionSection.style.display = "inline-block";
-    
+
     // disableTime.style.display = "inline-block";
     // tenMinutesButton.style.display = "inline-block";
     // thirtyMinutesButton.style.display = "inline-block";
