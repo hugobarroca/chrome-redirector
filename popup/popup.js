@@ -87,13 +87,13 @@ function updateUI() {
 }
 
 function updateEnableLabel(data) {
-  const disabledLabel = document.getElementById("disabledLabel");
+  const title = document.getElementById("title");
   if (data.disabled) {
-    disabledLabel.textContent = "Disabled";
-    disabledLabel.style.color = "red";
+    title.textContent = "Easy Redirector " + String.fromCodePoint(0x274C);
+    title.style.color = "red";
   } else {
-    disabledLabel.textContent = "Enabled";
-    disabledLabel.style.color = "green";
+    title.textContent = "Easy Redirector " + String.fromCodePoint(0x2705);
+    title.style.color = "green";
   }
 }
 
