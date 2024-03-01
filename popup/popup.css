@@ -27,3 +27,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#lowerButtonBar {
+  align-items: baseline;
+}
