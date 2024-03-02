@@ -32,10 +32,26 @@
         <br />
       </div>
       <div id="timerDisplayContainer">
-        <div type="number" id="timerDisplay"></div>
+        <div class="timerContainer" id="hourDiplayBlock">
+          <h1 type="number" id="hourDiplay"></h1>
+          <label type="number" id="hourDiplayLabel"></label>
+        </div>
+        <div class="timerContainer" id="minuteDiplayBlock">
+          <h1 type="number" id="minuteDiplay"></h1>
+          <label type="number" id="minuteDiplayLabel"></label>
+        </div>
+        <div class="timerContainer" id="secondDiplayBlock">
+          <h1 type="number" id="secondDiplay"></h1>
+          <label type="number" id="secondDiplayLabel"></label>
+        </div>
       </div>
       <div id="lowerButtonBar" class="flex-container">
-        <button type="button" class="btn btn-primary" id="disable">
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="disable"
+          style="margin-bottom: 10px"
+        >
           Disable
         </button>
         <br />

@@ -1,10 +1,13 @@
 body {
   min-width: 250px;
+  max-height: 250px;
 }
 
 .flex-container {
   display: flex;
   justify-content: space-between;
+  /* flex-direction: column;
+  align-items: center; */
 }
 
 .container {
@@ -12,6 +15,11 @@ body {
   flex-direction: column;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.timerContainer {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #button-bar {
@@ -25,9 +33,20 @@ body {
 
 #timerDisplayContainer {
   display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 #lowerButtonBar {
   align-items: baseline;
+}
+
+#minuteDisplayBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

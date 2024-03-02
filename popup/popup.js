@@ -31,6 +31,14 @@ function updateTimer() {
   chrome.alarms.get("enable", (alarm) => {
     if (alarm) {
       const timerDisplay = document.getElementById("timerDisplay");
+      const hourDiplay = document.getElementById("hourDiplay");
+      const hourDiplayLabel = document.getElementById("hourDiplayLabel");
+
+      const minuteDiplay = document.getElementById("minuteDiplay");
+      const minuteDiplayLabel = document.getElementById("minuteDiplayLabel");
+
+      const secondDiplay = document.getElementById("secondDiplay");
+      const secondDiplayLabel = document.getElementById("secondDiplayLabel");
 
       const timeRemaining = alarm.scheduledTime - Date.now();
 
@@ -47,12 +55,44 @@ function updateTimer() {
         secondsRemaining < 10 ? `0${secondsRemaining}` : secondsRemaining;
 
       if (hoursRemaining > 0) {
-        timerDisplay.textContent = `${hoursRemaining}:${minutesRemaining}:${secondsRemaining}`;
+        hourDiplay.style.display = "block";
+        hourDiplayLabel.style.display = "block";
+        hourDiplay.textContent = `${hoursRemaining}`;
+        hourDiplayLabel.textContent = "Hours";
       } else {
-        timerDisplay.textContent = `${minutesRemaining}:${secondsRemaining}`;
+        // Hides hourDiplay and hourDiplayLabel.
+        hourDiplay.style.display = "none";
+        hourDiplayLabel.style.display = "none";
+      }
+
+      if (minutesRemaining > 0) {
+        minuteDiplay.textContent = `${minutesRemaining}`;
+        minuteDiplayLabel.textContent = "Minutes";
+        minuteDiplay.style.display = "block";
+        minuteDiplayLabel.style.display = "block";
+      } else {
+        // Hides minuteDiplay and minuteDiplayLabel.
+        minuteDiplay.style.display = "none";
+        minuteDiplayLabel.style.display = "none";
+      }
+
+      if (secondsRemaining > 0) {
+        secondDiplay.textContent = `${secondsRemaining}`;
+        secondDiplayLabel.textContent = "Seconds";
+        secondDiplay.style.display = "block";
+        secondDiplayLabel.style.display = "block";
+      } else {
+        // Hides secondDiplay and secondDiplayLabel.
+        secondDiplay.style.display = "none";
+        secondDiplayLabel.style.display = "none";
       }
     } else {
-      timerDisplay.textContent = "";
+      hourDiplay.style.display = "none";
+      hourDiplayLabel.style.display = "none";
+      minuteDiplay.style.display = "none";
+      minuteDiplayLabel.style.display = "none";
+      secondDiplay.style.display = "none";
+      secondDiplayLabel.style.display = "none";
     }
   });
 }
@@ -89,7 +129,7 @@ function updateUI() {
 function updateEnableLabel(data) {
   const title = document.getElementById("title");
   if (data.disabled) {
-    title.textContent = "Easy Redirector " + String.fromCodePoint(0x274C);
+    title.textContent = "Easy Redirector " + String.fromCodePoint(0x274c);
     title.style.color = "red";
   } else {
     title.textContent = "Easy Redirector " + String.fromCodePoint(0x2705);
