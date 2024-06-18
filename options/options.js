@@ -22,9 +22,7 @@ document.getElementById("add-website-input").focus();
 
 // === Functions === //
 const addWebsite = () => {
-  let websiteToRedirect = (<HTMLInputElement>(
-    document.getElementById("add-website-input")
-  )).value;
+  let websiteToRedirect = document.getElementById("add-website-input").value;
 
   if (websiteToRedirect === "") {
     return;
