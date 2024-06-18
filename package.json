@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hugobarroca/chrome-redirector#readme",
   "devDependencies": {
+    "@types/chrome": "^0.0.268",
     "typescript": "^5.4.5"
   }
 }
