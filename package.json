@@ -1,0 +1,22 @@
+{
+  "name": "chrome-redirector",
+  "version": "1.0.0",
+  "description": "A chrome extension that enables easy redirects!",
+  "main": "service-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugobarroca/chrome-redirector.git"
+  },
+  "author": "Hugo Barroca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hugobarroca/chrome-redirector/issues"
+  },
+  "homepage": "https://github.com/hugobarroca/chrome-redirector#readme",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

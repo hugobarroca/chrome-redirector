@@ -80,7 +80,7 @@ const createListOfRedirectedSites = (websitesToRedirect) => {
   listContainer.appendChild(blockedSitesDiv);
 };
 
-function createRemoveIcon() {
+const createRemoveIcon = () => {
   var removeIcon = document.createElement("img");
   removeIcon.src = "icons8-close.svg";
   removeIcon.alt = "Remove";
@@ -88,9 +88,9 @@ function createRemoveIcon() {
   removeIcon.height = 20;
   removeIcon.style.cursor = "pointer";
   return removeIcon;
-}
+};
 
-function clickButtonOnEnter() {
+const clickButtonOnEnter = () => {
   let input = document.getElementById("add-website-input");
   input.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
@@ -98,12 +98,8 @@ function clickButtonOnEnter() {
       document.getElementById("add-blocked-website-button").click();
     }
   });
-}
+};
 
-function isEmpty(obj) {
+const isEmpty = (obj) => {
   return Object.keys(obj).length === 0;
-}
-
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
+};

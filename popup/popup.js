@@ -31,14 +31,14 @@ function updateTimer() {
   chrome.alarms.get("enable", (alarm) => {
     if (alarm) {
       const timerDisplay = document.getElementById("timerDisplay");
-      const hourDiplay = document.getElementById("hourDiplay");
-      const hourDiplayLabel = document.getElementById("hourDiplayLabel");
+      const hourDisplay = document.getElementById("hourDisplay");
+      const hourDisplayLabel = document.getElementById("hourDisplayLabel");
 
-      const minuteDiplay = document.getElementById("minuteDiplay");
-      const minuteDiplayLabel = document.getElementById("minuteDiplayLabel");
+      const minuteDisplay = document.getElementById("minuteDisplay");
+      const minuteDisplayLabel = document.getElementById("minuteDisplayLabel");
 
-      const secondDiplay = document.getElementById("secondDiplay");
-      const secondDiplayLabel = document.getElementById("secondDiplayLabel");
+      const secondDisplay = document.getElementById("secondDisplay");
+      const secondDisplayLabel = document.getElementById("secondDisplayLabel");
 
       const timeRemaining = alarm.scheduledTime - Date.now();
 
@@ -46,53 +46,67 @@ function updateTimer() {
       hoursRemaining =
         hoursRemaining < 10 ? `0${hoursRemaining}` : hoursRemaining;
 
-      let minutesRemaining = Math.floor(timeRemaining / 60000);
+      // Fix: Calculate minutes remaining after subtracting hours
+      let minutesRemaining = Math.floor((timeRemaining % 3600000) / 60000);
       minutesRemaining =
         minutesRemaining < 10 ? `0${minutesRemaining}` : minutesRemaining;
 
+      // Fix: Calculate seconds remaining correctly
       let secondsRemaining = Math.floor((timeRemaining % 60000) / 1000);
       secondsRemaining =
         secondsRemaining < 10 ? `0${secondsRemaining}` : secondsRemaining;
 
+      // Update the display elements
+      hourDisplay.textContent = hoursRemaining;
+      hourDisplayLabel.textContent = hoursRemaining === "01" ? "Hour" : "Hours";
+
+      minuteDisplay.textContent = minutesRemaining;
+      minuteDisplayLabel.textContent =
+        minutesRemaining === "01" ? "Minute" : "Minutes";
+
+      secondDisplay.textContent = secondsRemaining;
+      secondDisplayLabel.textContent =
+        secondsRemaining === "01" ? "Second" : "Seconds";
+
       if (hoursRemaining > 0) {
-        hourDiplay.style.display = "block";
-        hourDiplayLabel.style.display = "block";
-        hourDiplay.textContent = `${hoursRemaining}`;
-        hourDiplayLabel.textContent = "Hours";
+        hourDisplay.style.display = "block";
+        hourDisplayLabel.style.display = "block";
+        hourDisplay.textContent = `${hoursRemaining}`;
+        hourDisplayLabel.textContent = "Hours";
       } else {
-        // Hides hourDiplay and hourDiplayLabel.
-        hourDiplay.style.display = "none";
-        hourDiplayLabel.style.display = "none";
+        // Hides hourDisplay and hourDisplayLabel.
+        hourDisplay.style.display = "none";
+        hourDisplayLabel.style.display = "none";
       }
 
       if (minutesRemaining > 0) {
-        minuteDiplay.textContent = `${minutesRemaining}`;
-        minuteDiplayLabel.textContent = "Minutes";
-        minuteDiplay.style.display = "block";
-        minuteDiplayLabel.style.display = "block";
+        minuteDisplay.textContent = `${minutesRemaining}`;
+        minuteDisplayLabel.textContent = "Minutes";
+        minuteDisplay.style.display = "block";
+        minuteDisplayLabel.style.display = "block";
       } else {
-        // Hides minuteDiplay and minuteDiplayLabel.
-        minuteDiplay.style.display = "none";
-        minuteDiplayLabel.style.display = "none";
+        // Hides minuteDisplay and minuteDisplayLabel.
+        minuteDisplay.style.display = "none";
+        minuteDisplayLabel.style.display = "none";
       }
 
       if (secondsRemaining > 0) {
-        secondDiplay.textContent = `${secondsRemaining}`;
-        secondDiplayLabel.textContent = "Seconds";
-        secondDiplay.style.display = "block";
-        secondDiplayLabel.style.display = "block";
+        secondDisplay.textContent = `${secondsRemaining}`;
+        secondDisplayLabel.textContent = "Seconds";
+        secondDisplay.style.display = "block";
+        secondDisplayLabel.style.display = "block";
       } else {
-        // Hides secondDiplay and secondDiplayLabel.
-        secondDiplay.style.display = "none";
-        secondDiplayLabel.style.display = "none";
+        // Hides secondDisplay and secondDisplayLabel.
+        secondDisplay.style.display = "none";
+        secondDisplayLabel.style.display = "none";
       }
     } else {
-      hourDiplay.style.display = "none";
-      hourDiplayLabel.style.display = "none";
-      minuteDiplay.style.display = "none";
-      minuteDiplayLabel.style.display = "none";
-      secondDiplay.style.display = "none";
-      secondDiplayLabel.style.display = "none";
+      hourDisplay.style.display = "none";
+      hourDisplayLabel.style.display = "none";
+      minuteDisplay.style.display = "none";
+      minuteDisplayLabel.style.display = "none";
+      secondDisplay.style.display = "none";
+      secondDisplayLabel.style.display = "none";
     }
   });
 }
@@ -113,10 +127,28 @@ function updateEnableButton() {
 }
 
 async function reenableRedirector() {
-  await chrome.alarms.clear("enable");
-  chrome.storage.sync.set({ disabled: false }, () => {
-    console.log("Enabled");
-  });
+  try {
+    // Clear the "enable" alarm.
+    const wasCleared = await chrome.alarms.clear("enable");
+    if (!wasCleared) {
+      console.error("Failed to clear the alarm.");
+      return;
+    }
+
+    // Use a promise to handle the storage operation for consistency with async/await.
+    await new Promise((resolve, reject) => {
+      chrome.storage.sync.set({ disabled: false }, () => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          console.log("Enabled");
+          resolve();
+        }
+      });
+    });
+  } catch (error) {
+    console.error(`Error re-enabling the redirector: ${error.message}`);
+  }
 }
 
 function updateUI() {
@@ -146,20 +178,8 @@ function updateTimerInput(data) {
 
   if (data.disabled) {
     timeSelectionSection.style.display = "none";
-
-    // disableTime.style.display = "none";
-    // tenMinutesButton.style.display = "none";
-    // thirtyMinutesButton.style.display = "none";
-    // oneHourButton.style.display = "none";
-    // disableTimeLabel.style.display = "none";
   } else {
     timeSelectionSection.style.display = "inline-block";
-
-    // disableTime.style.display = "inline-block";
-    // tenMinutesButton.style.display = "inline-block";
-    // thirtyMinutesButton.style.display = "inline-block";
-    // oneHourButton.style.display = "inline-block";
-    // disableTimeLabel.style.display = "inline-block";
   }
 }
 
