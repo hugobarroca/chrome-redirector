@@ -1,108 +1,122 @@
+"use strict";
 // Startup code for the options page
 document.addEventListener("DOMContentLoaded", function () {
-  let addButton = document.getElementById("add-blocked-website-button");
-  addButton.addEventListener("click", addWebsite);
-  createListWithSavedOptions();
-});
-
-const clickButtonOnEnter = () => {
-  let input = document.getElementById("add-website-input");
-  input.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById("add-blocked-website-button").click();
+    let addButton = document.getElementById("add-blocked-website-button");
+    if (!addButton) {
+        console.error("Add button is null");
+        return;
     }
-  });
+    addButton.addEventListener("click", addWebsite);
+    createListWithSavedOptions();
+});
+const clickButtonOnEnter = () => {
+    let input = document.getElementById("add-website-input");
+    if (!input) {
+        console.error("Input is null");
+        return;
+    }
+    input.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const addBlockedWebsiteButton = document.getElementById("add-blocked-website-button");
+            if (!addBlockedWebsiteButton) {
+                console.error("Add button is null");
+                return;
+            }
+            addBlockedWebsiteButton.click();
+        }
+    });
 };
-
 clickButtonOnEnter();
-
 // Makes the input field to be focused when the options page is opened
-document.getElementById("add-website-input").focus();
-
+const addWebsiteInput = document.getElementById("add-website-input");
+if (!addWebsiteInput) {
+    console.error("Add website input is null");
+}
+else
+    addWebsiteInput.focus();
 // === Functions === //
 const addWebsite = () => {
-  let websiteToRedirect = document.getElementById("add-website-input").value;
-
-  if (websiteToRedirect === "") {
-    return;
-  }
-
-  websiteToRedirect = removeProtocolFromWebsite(websiteToRedirect);
-
-  chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
-    console.log(oldSites);
-    let newList;
-    if (isEmpty(oldSites)) {
-      newList = [websiteToRedirect];
-    } else {
-      newList = [...oldSites?.sitesToRedirect, websiteToRedirect];
+    let addWebsiteInput = document.getElementById("add-website-input");
+    if (!addWebsiteInput) {
+        console.error("Website input is null");
+        return;
     }
-    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-      createListOfRedirectedSites(newList);
+    let websiteToRedirect = addWebsiteInput.value;
+    if (websiteToRedirect === "") {
+        return;
+    }
+    websiteToRedirect = removeProtocolFromWebsite(websiteToRedirect);
+    chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
+        console.log(oldSites);
+        let newList;
+        if (isEmpty(oldSites)) {
+            newList = [websiteToRedirect];
+        }
+        else {
+            newList = [...oldSites === null || oldSites === void 0 ? void 0 : oldSites.sitesToRedirect, websiteToRedirect];
+        }
+        chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+            createListOfRedirectedSites(newList);
+        });
     });
-  });
 };
-
 const removeProtocolFromWebsite = (website) => {
-  return website.replace(/(^\w+:|^)\/\//, "");
+    return website.replace(/(^\w+:|^)\/\//, "");
 };
-
 const createListWithSavedOptions = () => {
-  chrome.storage.sync.get("sitesToRedirect").then((result) => {
-    createListOfRedirectedSites(result.sitesToRedirect);
-  });
+    chrome.storage.sync.get("sitesToRedirect").then((result) => {
+        createListOfRedirectedSites(result.sitesToRedirect);
+    });
 };
-
 const addValue = (newValue) => {
-  chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
-    let newList = [...oldSites.sitesToRedirect, newValue];
-    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-      createListOfRedirectedSites(newList);
+    chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
+        let newList = [...oldSites.sitesToRedirect, newValue];
+        chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+            createListOfRedirectedSites(newList);
+        });
     });
-  });
 };
-
 const removeValue = (keyToRemove) => {
-  chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
-    let newList = [
-      ...oldSites.sitesToRedirect.filter((x) => x !== keyToRemove),
-    ];
-    chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
-      createListOfRedirectedSites(newList);
+    chrome.storage.sync.get("sitesToRedirect").then((oldSites) => {
+        let newList = [
+            ...oldSites.sitesToRedirect.filter((x) => x !== keyToRemove),
+        ];
+        chrome.storage.sync.set({ sitesToRedirect: newList }, () => {
+            createListOfRedirectedSites(newList);
+        });
     });
-  });
 };
-
 const createListOfRedirectedSites = (websitesToRedirect) => {
-  console.log("Running create list...");
-  var listContainer = document.getElementById("listContainer");
-  listContainer.innerHTML = "";
-  var blockedSitesDiv = document.createElement("div");
-  websitesToRedirect.forEach(function (item) {
-    var blockedSiteItem = document.createElement("p");
-    blockedSiteItem.className = "blocked-site";
-    var removeIcon = createRemoveIcon();
-    blockedSiteItem.addEventListener("click", function () {
-      console.log("Remove button clicked!");
-      removeValue(item);
+    console.log("Running create list...");
+    var listContainer = document.getElementById("listContainer");
+    if (!listContainer) {
+        console.error("List container is null");
+        return;
+    }
+    listContainer.innerHTML = "";
+    var blockedSitesDiv = document.createElement("div");
+    websitesToRedirect.forEach(function (item) {
+        var blockedSiteItem = document.createElement("p");
+        blockedSiteItem.className = "blocked-site";
+        blockedSiteItem.addEventListener("click", function () {
+            console.log("Remove button clicked!");
+            removeValue(item);
+        });
+        blockedSiteItem.textContent = item;
+        blockedSitesDiv.appendChild(blockedSiteItem);
     });
-    blockedSiteItem.textContent = item;
-    blockedSitesDiv.appendChild(blockedSiteItem);
-  });
-  listContainer.appendChild(blockedSitesDiv);
+    listContainer.appendChild(blockedSitesDiv);
 };
-
 const createRemoveIcon = () => {
-  var removeIcon = document.createElement("img");
-  removeIcon.src = "icons8-close.svg";
-  removeIcon.alt = "Remove";
-  removeIcon.width = 20;
-  removeIcon.height = 20;
-  removeIcon.style.cursor = "pointer";
-  return removeIcon;
+    var removeIcon = document.createElement("img");
+    removeIcon.src = "icons8-close.svg";
+    removeIcon.alt = "Remove";
+    removeIcon.width = 20;
+    removeIcon.height = 20;
+    removeIcon.style.cursor = "pointer";
+    return removeIcon;
 };
-
 const isEmpty = (obj) => {
-  return Object.keys(obj).length === 0;
+    return Object.keys(obj).length === 0;
 };
