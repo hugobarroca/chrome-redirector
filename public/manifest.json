@@ -5,7 +5,7 @@
   "version": "1.0",
   "action": {
     "default_popup": "src/popup/popup.html",
-    "default_icon": "popup.png"
+    "default_icon": "assets/popup.png"
   },
   "permissions": ["storage", "alarms"],
   "options_page": "src/options/options.html",
