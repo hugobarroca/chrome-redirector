@@ -1,7 +1,7 @@
 const optionsButton = document.getElementById("options");
 if (optionsButton) {
   optionsButton.addEventListener("click", () => {
-    chrome.tabs.create({ url: "options/options.html" });
+    chrome.tabs.create({ url: "src/options/options.html" });
   });
 }
 
