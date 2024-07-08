@@ -4,20 +4,20 @@
   "description": "Extensions which redirects the user away from time-consuming websites.",
   "version": "1.0",
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": "popup/popup.png"
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "assets/popup.png"
   },
   "permissions": ["storage", "alarms"],
-  "options_page": "options/options.html",
+  "options_page": "src/options/options.html",
   "content_scripts": [
     {
-      "js": ["scripts/content.js"],
+      "js": ["content.js"],
       "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
   ],
   "background": {
-    "service_worker": "service-worker.js",
+    "service_worker": "serviceWorker.js",
     "type": "module"
   }
 }

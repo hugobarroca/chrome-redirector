@@ -4,7 +4,9 @@
   "description": "A chrome extension that enables easy redirects!",
   "main": "service-worker.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,10 @@
   "homepage": "https://github.com/hugobarroca/chrome-redirector#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.268",
+    "@types/node": "^20.14.10",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "vite": "^5.3.1"
   }
 }
