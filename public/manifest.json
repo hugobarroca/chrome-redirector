@@ -3,9 +3,11 @@
   "name": "Scald's Redirector",
   "description": "Extensions which redirects the user away from time-consuming websites.",
   "version": "1.0",
-  "action": {
-    "default_popup": "src/popup/popup.html",
-    "default_icon": "assets/popup.png"
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "permissions": ["storage", "alarms"],
   "options_page": "src/options/options.html",
