@@ -22,6 +22,11 @@ body {
   margin-right: 5px;
 }
 
+/* Makes the mouse clickable */
+#options {
+  cursor: pointer;
+}
+
 #button-bar {
   margin-bottom: 10px;
 }

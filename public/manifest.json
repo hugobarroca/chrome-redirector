@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Scald's Redirector",
-  "description": "Extensions which redirects the user away from time-consuming websites.",
+  "name": "Easy Redirector",
+  "description": "Redirect your attention away from distracting sites into what maters.",
   "version": "1.0",
   "icons": {
     "16": "icons/icon16.png",
