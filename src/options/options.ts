@@ -3,7 +3,6 @@ interface ListStore {
   buttonId: string;
   inputId: string;
   listId: string;
-  className: string;
 }
 
 const LUCKY_STORE: ListStore = {
@@ -11,7 +10,6 @@ const LUCKY_STORE: ListStore = {
   buttonId: "add-lucky-website-button",
   inputId: "add-lucky-website-input",
   listId: "lucky-sites-list",
-  className: "lucky-site",
 };
 
 const BLOCKED_STORE: ListStore = {
@@ -19,7 +17,6 @@ const BLOCKED_STORE: ListStore = {
   buttonId: "add-blocked-website-button",
   inputId: "add-blocked-website-input",
   listId: "blocked-sites-list",
-  className: "blocked-site",
 };
 
 const removeProtocolFromWebsite = (website: string) => {
@@ -115,7 +112,7 @@ const createListRepresentation = (list: string[], store: ListStore) => {
 
   list.forEach(function (listItem) {
     let htmlListItem: HTMLElement = document.createElement("p");
-    htmlListItem.className = store.className;
+    htmlListItem.className = "list-item";
     htmlListItem.addEventListener("click", function () {
       removeFromChromeStore(listItem, store);
     });

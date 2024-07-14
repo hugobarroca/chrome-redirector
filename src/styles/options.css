@@ -11,12 +11,12 @@ body {
   align-items: flex-start;
 }
 
-.blocked-site:hover {
+.list-item:hover {
   background-color: #ffcccc;
   cursor: pointer;
 }
 
-.blocked-site {
+.list-item {
   text-align: center;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -33,6 +33,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.add-website-input {
+  width: 30%;
 }
 
 #add-blocked-website-button {
@@ -63,14 +67,6 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
-}
-
-#add-website-input {
-  width: 30%;
-}
-
-#add-lucky-website-input {
-  width: 30%;
 }
 
 #listContainer {
