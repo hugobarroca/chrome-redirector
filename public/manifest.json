@@ -9,6 +9,10 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "icons/icon128.png"
+  },
   "permissions": ["storage", "alarms"],
   "options_page": "src/options/options.html",
   "content_scripts": [

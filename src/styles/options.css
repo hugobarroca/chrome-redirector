@@ -39,6 +39,10 @@ body {
   width: 30%;
 }
 
+.footer {
+  color: #8b8b8b;
+}
+
 #add-blocked-website-button {
   margin-left: 10px;
 }
