@@ -16,3 +16,5 @@ To get started with Scald's Redirector, clone this repository to your local mach
 ```sh
 git clone https://github.com/hugobarroca/chrome-redirector.git
 ```
+
+Buy me a coffee ☕ https://ko-fi.com/scald
