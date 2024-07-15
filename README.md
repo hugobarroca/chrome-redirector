@@ -1,6 +1,6 @@
-# Scald's Redirector
+# Easy Redirector
 
-Scald's Redirector is a Chrome extension designed to boost productivity by redirecting users away from time-wasting websites. It leverages Chrome's extension capabilities to provide a seamless and customizable experience for managing your focus and productivity.
+Easy Redirector is a Chrome extension designed to boost productivity by redirecting users away from time-wasting websites. It leverages Chrome's extension capabilities to provide a seamless and customizable experience for managing your focus and productivity.
 
 ## Features
 
