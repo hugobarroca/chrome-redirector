@@ -17,4 +17,14 @@ To get started with Scald's Redirector, clone this repository to your local mach
 git clone https://github.com/hugobarroca/chrome-redirector.git
 ```
 
+After you have a local copy of the code, make sure you have npm installed. You can install all the required dependencies with
+```
+npm install
+```
+ To test the extension locally, you can run 
+ ```
+npm run build
+```
+This will compile all the necessary files in the **dist** directory, and you can load it directly into chrome from the chrome://extensions screen.
+
 Buy me a coffee ☕ https://ko-fi.com/scald
