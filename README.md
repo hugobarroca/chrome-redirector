@@ -1,4 +1,4 @@
-# Easy Redirector
+# Easy Redirector [![Build Status](https://dev.azure.com/hugobarroca98/Study%20for%20AZ-400/_apis/build/status%2Fhugobarroca.chrome-redirector?branchName=main)](https://dev.azure.com/hugobarroca98/Study%20for%20AZ-400/_build/latest?definitionId=1&branchName=main)
 
 Easy Redirector is a Chrome extension designed to boost productivity by redirecting users away from time-wasting websites. It leverages Chrome's extension capabilities to provide a seamless and customizable experience for managing your focus and productivity.
 
